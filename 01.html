@@ -1,0 +1,139 @@
+1단계: HTML 문서의 구조 잡기
+
+<!-- ===== 1. 기본 문법 ===== -->
+
+1단계: HTML - 문서의 구조 잡기 (뼈대)
+웹 페이지의 논리적인 구조를 설계하고 백엔드와 연동하는 방법을 배웁니다.
+
+시맨틱 태그
+텍스트와 리스트
+하이퍼링크와 이미지
+폼 (백엔드 연동)
+
+<!-- ===== 2. 시맨틱 태그 ===== -->
+
+시맨틱 태그 (Semantic Tags)
+의미 있는 태그를 사용하면 검색 엔진이 페이지 구조를 이해하고 유지보수가 쉬워집니다.
+
+시맨틱 태그 예제
+이것은 article 태그 내의 콘텐츠입니다. 독립적인 내용을 담을 때 사용합니다.
+
+<!-- ===== 3. 텍스트와 리스트 ===== -->
+
+텍스트와 리스트
+
+제목 계층 (h1 ~ h6)
+이것은 h4 태그입니다
+이것은 h5 태그입니다
+이것은 h6 태그입니다
+
+순서 있는 리스트 (ol)
+HTML 기초 배우기
+CSS로 스타일하기
+JavaScript 상호작용 추가
+백엔드 연동하기
+
+순서 없는 리스트 (ul)
+쉬운 문법
+빠른 프로토타입
+크로스 플랫폼 호환
+SEO 친화적
+
+<!-- ===== 4. 하이퍼링크와 이미지 ===== -->
+
+하이퍼링크와 이미지
+
+하이퍼링크 (a 태그)
+Google 열기 (새 탭)
+GitHub로 이동
+폼 섹션으로 이동 (페이지 내 링크)
+
+이미지 (img 태그)
+설명: 예제 이미지 300x200
+alt 속성은 이미지가 로드되지 않을 때 대체 텍스트로 표시되며 SEO와 접근성에 중요합니다.
+
+<!-- ===== 5. 폼 (백엔드 연동 핵심) ===== -->
+
+폼 (Form) - 백엔드 연동 핵심
+name 속성이 백엔드(Django)로 전달되는 핵심입니다!
+
+사용자 정보
+
+<!-- 텍스트 입력 -->
+
+이름:
+홍길동
+Django: request.POST['username']
+
+<!-- 이메일 입력 -->
+
+이메일:
+user@example.com
+
+Django: request.POST['email']
+
+<!-- 비밀번호 입력 -->
+
+비밀번호:
+
+Django: request.POST['password']
+
+<!-- 숫자 입력 -->
+
+나이:
+25
+Django: request.POST['age']
+
+<!-- 라디오 버튼 (단일 선택) -->
+
+성별:
+남성
+여성
+Django: request.POST['gender']
+
+<!-- 체크박스 (다중 선택) -->
+
+관심분야:
+Python
+Web Development
+AI/ML
+Django: request.POST.getlist('interests')
+
+<!-- 드롭다운 선택 (select) -->
+
+국가:
+-- 선택하세요 --
+대한민국
+일본
+중국
+미국
+Django: request.POST['country']
+
+<!-- 텍스트 영역 (다중 라인) -->
+
+메시지:
+자유롭게 입력하세요...
+Django: request.POST['message']
+
+<!-- 날짜 입력 -->
+
+생년월일:
+Django: request.POST['birthdate']
+
+<!-- 시간 입력 -->
+
+시작 시간:
+Django: request.POST['starttime']
+
+제출하기
+초기화
+
+Django 백엔드 수신 예제:
+
+def submit(request):
+if request.method == 'POST':
+username = request.POST['username']
+email = request.POST['email']
+interests = request.POST.getlist('interests')
+# 데이터베이스 저장...
+return render(request, 'success.html')
