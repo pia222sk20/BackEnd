@@ -74,41 +74,83 @@
 
             <h3>이미지 (img 태그)</h3>
             <p>
-                설명: 예제 이미지 300x200
+                <img src='https://huggingface.co/front/assets/huggingface_logo-noborder.svg'
+                    alt="설명: 허깅페이지 아이콘">
             </p>
-alt 속성은 이미지가 로드되지 않을 때 대체 텍스트로 표시되며 SEO와 접근성에 중요합니다.
-</section>
+            <p>
+                <small>alt 속성은 이미지가 로드되지 않을 때 대체 텍스트로 표시되며 SEO와 접근성에 중요합니다.</small>
+            </p>
+        </section>
 <!-- ===== 5. 폼 (백엔드 연동 핵심) ===== -->
+        <section id="'form">
+            <h2>폼 (Form) - 백엔드 연동 핵심</h2>
+            <p><strong> 속성이 백엔드(Django)로 전달되는 핵심입니다!</strong></p>
+            <form method="POST" action="/submit">
+                <strong>사용자 정보</strong>
 
-폼 (Form) - 백엔드 연동 핵심
-name 속성이 백엔드(Django)로 전달되는 핵심입니다!
+                <!-- 텍스트 입력 -->
+                <div style="margin-bottom: 15px;">                 
+                    <label for="'username">이름</label>
+                    <input type="text"
+                        id="'username"
+                        name="'username"
+                        placeholder="이름을 입력하세요"
+                        required
+                    >
+                    <small>Django: request.POST['username']</small>
+                </div>
+                <!-- 이메일 입력 -->
+                 <div style="margin-bottom: 15px;">
+                    <label for='email'>이메일:</label>
+                    <input type="email"
+                        id="email"
+                        name="email"
+                        placeholder="user@example.com"
+                        required
+                    >
+                    <small>Django: request.POST['email']</small>
+                 </div>
+                 <!-- 비밀번호 입력 -->
+                 <div style="margin-bottom: 15px;">
+                    <label for='password'>비밀번호:</label>
+                    <input type="password"
+                        id="password"
+                        name="password"
+                        placeholder="****"                        
+                    >
+                    <small>Django: request.POST['password']</small>
+                 </div>
+                 <!-- 숫자 입력 -->
+                <div style="margin-bottom: 15px;">
+                    <label for='age'>나이:</label>
+                    <input type="number"
+                        id="age"
+                        name="age"
+                        min="1"
+                        max="150"
+                        placeholder="25"                        
+                    >
+                    <small>Django: request.POST['age']</small>
+                </div>
+                <!-- 라디오 버튼 (단일 선택) -->
+                <div style="margin-bottom: 15px;">
+                    <label >성별</label>
+                    <input type="radio"
+                        id="male"
+                        name="gender"
+                        value="male"
+                    >
+                    <label for="male">남성</label>
+                    <input type="radio"
+                        id="female"
+                        name="gender"
+                        value="female"
+                    >
+                    <label for="female">여성</label>
+                    <small>Django: request.POST['gender']</small>
+                </div>                
+            </form>
 
-사용자 정보
-
-<!-- 텍스트 입력 -->
-
-이름:
-홍길동
-Django: request.POST['username']
-
-<!-- 이메일 입력 -->
-
-이메일:
-user@example.com
-
-Django: request.POST['email']
-
-<!-- 비밀번호 입력 -->
-
-비밀번호:
-
-Django: request.POST['password']
-
-<!-- 숫자 입력 -->
-
-나이:
-25
-Django: request.POST['age']
 
 <!-- 라디오 버튼 (단일 선택) -->
 
@@ -163,6 +205,7 @@ email = request.POST['email']
 interests = request.POST.getlist('interests')
 # 데이터베이스 저장...
 return render(request, 'success.html')
+                </section>
             </main>
         </div>
     </body>
