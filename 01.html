@@ -5,6 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>1단계: HTML 문서의 구조 잡기</title>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;     
+            border-radius: 5px;  
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);        
+        }
+    </style>
 </head>
 <body>
     <div class = 'container'>
@@ -85,7 +101,7 @@
         <section id="'form">
             <h2>폼 (Form) - 백엔드 연동 핵심</h2>
             <p><strong> 속성이 백엔드(Django)로 전달되는 핵심입니다!</strong></p>
-            <form method="POST" action="/submit">
+            <form method="GET" action="/submit" style="background-color: gray;">
                 <strong>사용자 정보</strong>
 
                 <!-- 텍스트 입력 -->
