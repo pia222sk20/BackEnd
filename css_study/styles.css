@@ -79,4 +79,95 @@ p{
 .secondary-btn:hover{
     background-color: #180310;
 }    
+.warning-btn {
+    background-color: #ff9800;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 5px;
+}
 
+.warning-btn:hover {
+    background-color: #180310;
+}
+.card{
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.highlight{
+    background-color: #fff3cd;
+    border-left: 4px solid #ffc107;
+    padding: 10px;  
+    margin-bottom: 15px;  
+    border-radius: 3px;
+}
+.success{
+    background-color: #d4edda;
+    border-left: 4px solid #28a745;
+    padding: 10px;  
+    margin-bottom: 15px;  
+    border-radius: 3px;
+    color: #155724;
+}
+.error{
+    background-color: #f8d7da;
+    border-left: 4px solid #dc3545;
+    padding: 10px;  
+    margin-bottom: 15px;  
+    border-radius: 3px;
+    color: #155724;
+}
+ /* id */
+ #main-title{
+    font-size: 2.5em;  /*부모요소의 글자크기 기준으로 2.5배 (font-size) */
+    color:#1a1a1a;
+    /* x-offset(오른쪽 음수면 왼쪽) 
+    y-offset(아래쪽 음수면 위쪽) blur-radius(퍼짐정도) 색상*/
+    text-shadow:2px 2px 4px rgba(0,0,0,0.1)
+ }
+ #selector-demo{
+    padding:50px;
+    background-color: #fdebe3;
+    border-radius:5px;
+    margin-bottom: 20px;
+ }
+ /* 포지셔닝 */
+ /* static 기본값 */
+ .position-static{
+    position: static;
+    background-color: #c8e6c9;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 3px;
+ }
+ .position-relative{
+    position: relative;
+    background-color: #b3e5fc;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 3px;
+    /* top left bottom right로  상대적으로 이동 */
+    left:20px;
+ }
+ /* Absolute(부모는 poistion이 relative/absolute/fixed여야함) */
+ .postion-absolute-container{
+    position: relative;
+    background-color: #fff9c4;
+    padding: 10px;
+    height: 80px;
+    margin-bottom: 15px;
+    border: 2px dashed #fbc02d;
+    border-radius: 3px;
+ }
+ .position-absolute{
+    position: absolute;
+    background-color: #ffccbc;
+    padding: 10px;
+    top:10px;
+    right:10px;
+    border-radius: 3px;
+ }
