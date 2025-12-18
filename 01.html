@@ -148,55 +148,74 @@
                     >
                     <label for="female">여성</label>
                     <small>Django: request.POST['gender']</small>
-                </div>                
+                </div>    
+                <!-- 체크박스 (다중 선택) --> 
+                 <div style="margin-bottom: 15px;">
+                    <label>관심분야:</label>
+                    <input type="checkbox"
+                        id="python"
+                        name="interests"
+                        value="python"
+                    >
+                    <label for="python">Python</label>
+
+                    <input type="checkbox"
+                        id="python"
+                        name="interests"
+                        value="web"
+                    >
+                    <label for="python">Web Development</label>
+                    
+                    <input type="checkbox"
+                        id="python"
+                        name="interests"
+                        value="ai"
+                    >
+                    <label for="python">AI/ML</label>
+                    <small>Django: request.POST.getlist('interests')</small>
+                 </div> 
+                  <!-- 드롭다운 선택 (select) -->
+                    <div style="margin-bottom: 15px;">
+                        <label for="country">국가:</label><br>
+                        <select id="country" name="country" required>
+                            <option value="">-- 선택하세요 --</option>
+                            <option value="korea">대한민국</option>
+                            <option value="japan">일본</option>
+                            <option value="china">중국</option>
+                            <option value="usa">미국</option>
+                        </select>
+                        <small>Django: request.POST['country']</small>
+                    </div>
+
+                    <!-- 텍스트 영역 (다중 라인) -->
+                    <div style="margin-bottom: 15px;">
+                        <label for="message">메시지:</label><br>
+                        <textarea id="message" 
+                                    name="message" 
+                                    cols="50"
+                                    rows="5" 
+                                    placeholder="자유롭게 입력하세요..."></textarea>
+                        <small>Django: request.POST['message']</small>
+                    </div>
+
+                    <!-- 날짜 입력 -->
+                    <div style="margin-bottom: 15px;">
+                        <label for="birthdate">생년월일:</label><br>
+                        <input type="date" id="birthdate" name="birthdate">
+                        <small>Django: request.POST['birthdate']</small>
+                    </div>
+
+                    <!-- 시간 입력 -->
+                    <div style="margin-bottom: 15px;">
+                        <label for="starttime">시작 시간:</label><br>
+                        <input type="time" id="starttime" name="starttime">
+                        <small>Django: request.POST['starttime']</small>
+                    </div>   
+                    <!-- 버튼        -->
+                     <button type="submit">제출하기</button>
+                     <button type="reset">초기화</button>
             </form>
-
-
-<!-- 라디오 버튼 (단일 선택) -->
-
-성별:
-남성
-여성
-Django: request.POST['gender']
-
-<!-- 체크박스 (다중 선택) -->
-
-관심분야:
-Python
-Web Development
-AI/ML
-Django: request.POST.getlist('interests')
-
-<!-- 드롭다운 선택 (select) -->
-
-국가:
--- 선택하세요 --
-대한민국
-일본
-중국
-미국
-Django: request.POST['country']
-
-<!-- 텍스트 영역 (다중 라인) -->
-
-메시지:
-자유롭게 입력하세요...
-Django: request.POST['message']
-
-<!-- 날짜 입력 -->
-
-생년월일:
-Django: request.POST['birthdate']
-
-<!-- 시간 입력 -->
-
-시작 시간:
-Django: request.POST['starttime']
-
-제출하기
-초기화
-
-Django 백엔드 수신 예제:
+<!-- Django 백엔드 수신 예제:
 
 def submit(request):
 if request.method == 'POST':
@@ -204,7 +223,7 @@ username = request.POST['username']
 email = request.POST['email']
 interests = request.POST.getlist('interests')
 # 데이터베이스 저장...
-return render(request, 'success.html')
+return render(request, 'success.html') -->
                 </section>
             </main>
         </div>
