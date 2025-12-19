@@ -25,13 +25,23 @@ $(document).ready(function(){
     });    
     // 삭제 : 단일 행   테이블의 데이터는 동적으로 생성했기때문에 이벤트를 직접 발생시키지 못하고 위임해야 한다
     $("#userTable").on('click','.remove',function(){
-        const id = $(this).closest('tr').data('id')   // 태그 안에 있는 어트리뷰트(attr) data-id
-        users = users.filter(u => u.id != id)
-        renderTable()
+        const id = $(this).closest('tr').data('id')   // 태그 안에 있는 어트리뷰트(attr) data-id        
+        deleteUser(id)
     });
     // 삭제 버튼(selected checkbox)  다중 삭제
 
 });
+
+function deleteUser(id){
+    $.ajax({
+        url:`http://localhost:3000/users/${id}`,
+        method : 'DELETE',                
+        success:function(){
+            alert('삭제되었습니다.');
+            loadUsers(); // 목록 갱신
+        }
+    });
+}
 
 function updateUser(id,data){
     $.ajax({
