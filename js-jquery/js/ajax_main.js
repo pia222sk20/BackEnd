@@ -9,8 +9,7 @@ function loadUsers(){
         success:function(users){
             $('#userTable').empty();
             users.forEach(user => {
-                $('#userTable').append(
-                     $('#userTable').append(
+                $('#userTable').append(                     
                     `
                     <tr data-id="${user.id}">
                         <td><input type="checkbox" class="chk"></td>
@@ -22,8 +21,7 @@ function loadUsers(){
                             <button class="remove">REMOVE</button>
                         </td>
                     </tr>
-                    `
-                    )
+                    `                   
                 )
             });
         },
