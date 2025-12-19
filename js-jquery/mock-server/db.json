@@ -1,14 +1,9 @@
 {
   "users": [
     {
-      "id": "1",
-      "name": "honh gil dong",
-      "email": "hong@gmail.com"
-    },
-    {
-      "id": "2",
-      "name": "choi gil dong",
-      "email": "choi@gmail.com"
+      "id": "6ccc",
+      "name": "홍길동",
+      "email": "홍길동@닷컴"
     }
   ]
 }

@@ -32,6 +32,26 @@ $(document).ready(function(){
         deleteUser(id)
     });
     // 삭제 버튼(selected checkbox)  다중 삭제
+    const deleteRequests = [] // ajax 요청을 저장
+    $("#deleteBtn").on('click',function(){        
+        $('.chk:checked').each(function(){
+            const id = $(this).closest('tr').data('id')  
+            deleteRequests.push(
+                $.ajax({
+                    url:`http://localhost:3000/users/${id}`,
+                    method:'DELETE'
+                })
+            )
+        }); 
+        // 모든 삭제 요청이 끝날때 까지 기다림
+        $.when(...deleteRequests).then(function(){   // $.when(p1,p2,p3)
+            alert('선택된 항목 삭제 완료')
+            loadUsers()
+        }).fail(function(){
+            alert('일부 삭제 중 오류가 발생')
+            loadUsers()
+        });
+    });
 
 });
 
