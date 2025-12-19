@@ -9,22 +9,28 @@ $(document).ready(
             {id:2, name:'김철수',email:'kim@test.com'},
         ]
         // for user in users:
-            // user     
-        users.forEach(user => {
-            $('#userTable').append(
-                `
-                <tr data-id="${user.id}">
-                    <td><input type="checkbox" class="chk"></td>
-                    <td>${user.id}</td>
-                    <td>${user.name}</td>
-                    <td>${user.email}</td>
-                    <td>
-                        <button class="edit">MODIFY</button>
-                        <button class="remove">REMOVE</button>
-                    </td>
-                </tr>
-                `            )
-        });
+        // user     
+        function renderTable(){
+            $('#userTable').empy();
+            users.forEach(user => {
+                $('#userTable').append(
+                    `
+                    <tr data-id="${user.id}">
+                        <td><input type="checkbox" class="chk"></td>
+                        <td>${user.id}</td>
+                        <td>${user.name}</td>
+                        <td>${user.email}</td>
+                        <td>
+                            <button class="edit">MODIFY</button>
+                            <button class="remove">REMOVE</button>
+                        </td>
+                    </tr>
+                    `            )
+            });
+        }
+
+        renderTable();
+
         // 전체 선택 해제
         $("#checkall").on('change',function(){
             $(".chk").prop('checked',this.checked)            
@@ -52,6 +58,8 @@ $(document).ready(
             // }
 
         });
+        users.push({id:newId, name, email})
+
 
     }   
 );
