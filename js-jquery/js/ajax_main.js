@@ -19,7 +19,7 @@ $(document).ready(function(){
     $("#userTable").on('click','.edit',function(){
         const name = prompt('수정할 이름');
         const email = prompt('수정할 이메일');
-        const idx = $(this).closest('tr').data('id');
+        const id = $(this).closest('tr').data('id');
         data = {'name':name, 'email':email}
         updateUser(id,data)
     });    
@@ -32,6 +32,20 @@ $(document).ready(function(){
     // 삭제 버튼(selected checkbox)  다중 삭제
 
 });
+
+function updateUser(id,data){
+    $.ajax({
+        url:`http://localhost:3000/users/${id}`,
+        method : 'PUT',
+        contentType : 'application/json',
+        data : JSON.stringify(data),
+        success:function(){
+            alert('수정되었습니다.');
+            loadUsers(); // 목록 갱신
+        }
+    });
+}
+
 
 function loadUsers(){
     $.ajax({
