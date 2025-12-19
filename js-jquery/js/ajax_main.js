@@ -15,6 +15,22 @@ $(document).ready(function(){
         const user = {name, email}
         createUser(user);
     });
+ // 업데이트(update)
+    $("#userTable").on('click','.edit',function(){
+        const name = prompt('수정할 이름');
+        const email = prompt('수정할 이메일');
+        const idx = $(this).closest('tr').data('id');
+        data = {'name':name, 'email':email}
+        updateUser(id,data)
+    });    
+    // 삭제 : 단일 행   테이블의 데이터는 동적으로 생성했기때문에 이벤트를 직접 발생시키지 못하고 위임해야 한다
+    $("#userTable").on('click','.remove',function(){
+        const id = $(this).closest('tr').data('id')   // 태그 안에 있는 어트리뷰트(attr) data-id
+        users = users.filter(u => u.id != id)
+        renderTable()
+    });
+    // 삭제 버튼(selected checkbox)  다중 삭제
+
 });
 
 function loadUsers(){
