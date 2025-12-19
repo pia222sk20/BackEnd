@@ -36,7 +36,7 @@ $(document).ready(
         });
         // 버튼 비활성화(중복 클릭 방지)  저장 결제 api 호출
         $('#saveBtn').click(function(){
-            $(this).prop('diabled',true)
+            $(this).prop('disabled',true)
 
             setTimeout( ()=>{
                 $(this).prop('disabled',false)
