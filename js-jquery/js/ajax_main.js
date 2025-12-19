@@ -1,10 +1,14 @@
+// api를 테스트하기위해서 통신이 필요하고 Mock 서버인 json server로 실습
+// npm install -g json-server
+// json-server --watch db.json --port 3000
+
 $(document).ready(function(){
     loadUsers();
 });
 
 function loadUsers(){
     $.ajax({
-        url:'/api/users', 
+        url:'http://localhost:3000/users', 
         method: 'GET',
         success:function(users){
             $('#userTable').empty();
