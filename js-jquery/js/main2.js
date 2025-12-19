@@ -65,7 +65,15 @@ $(document).ready(
             users = users.filter(u=> !ids.includes(u.id))
             renderTable();
         });
-
-
+        // 업데이트(update)
+        $('.edit').on('click',function(){
+            const name = prompt('수정할 이름');
+            const email = prompt('수정할 이메일');
+            const idx = $(this).closest('tr').data('id')-1;
+            const user = users[idx];
+            user.name = name;
+            user.email = email;
+            renderTable();        
+        });
     }   
 );
