@@ -4,9 +4,12 @@
 // npm install -g json-server
 // json-server --watch db.json --port 3000
 
+// 화면이 로드될때까지 기다렸다고 완료되면
 $(document).ready(function(){
+    // 1. 데이터 로드
     loadUsers();
 
+    //2. 원래 있던 element에 대한 이벤트 등록
     // CREATE 행 추가  prompt
     $("#addBtn").on('click',function(){
         const name = prompt('이름 입력');
@@ -32,6 +35,7 @@ $(document).ready(function(){
 
 });
 
+// 함수 등록
 function deleteUser(id){
     $.ajax({
         url:`http://localhost:3000/users/${id}`,
