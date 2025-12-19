@@ -1,4 +1,6 @@
 // api를 테스트하기위해서 통신이 필요하고 Mock 서버인 json server로 실습
+// json 서버용 directory를 만들고 해당 directory로 이동해서
+// db.json파일을 생성하고 -- DB
 // npm install -g json-server
 // json-server --watch db.json --port 3000
 
