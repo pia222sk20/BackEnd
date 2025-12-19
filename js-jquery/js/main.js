@@ -43,14 +43,35 @@ $(document).ready(
             },2000  );
         });
         // 입력값을 실시간 검증
-        $('#username').on('input',()=>{
-            const val = $(this).val()
+        // $('#username').on('input',function(){  // => 함수는 this를 바인딩 하지 않고 window객체를 
+        //     const val = $(this).val()
+        //     if (val.length < 3){
+        //         $('#msg').text('3자 이상 입력').css('color','red')
+        //     }else{
+        //         $('#msg').text('사용가능').css('color','green')
+        //     }
+        // });
+        $('#username').on('input',(e)=>{  // => 함수는 this를 바인딩 하지 않고 window객체를 
+            const val = e.target.value
             if (val.length < 3){
                 $('#msg').text('3자 이상 입력').css('color','red')
             }else{
                 $('#msg').text('사용가능').css('color','green')
             }
-        });
+        });        
+        // 동적 요소 추가
+        let cnt = 1;
+        $('#addBtn').click(function(){
+            $('#list').append(
+                `
+                <div class="item">
+                    동적항목 ${cnt++}
+                    <span class="remove">삭제</span>
+                </div>
+                `
+            );
+        })
+
 
     }   
 );
