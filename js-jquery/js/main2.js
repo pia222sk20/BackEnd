@@ -11,7 +11,7 @@ $(document).ready(
         // for user in users:
         // user     
         function renderTable(){
-            $('#userTable').empy();
+            $('#userTable').empty();
             users.forEach(user => {
                 $('#userTable').append(
                     `
@@ -46,19 +46,25 @@ $(document).ready(
             const name = prompt('이름 입력');
             const email = prompt('이메일 입력');
             if(!name || !email) return;
-            const newId = users.length? users[users.length-1].id+1 : 1 ; // javascrip or java or c++ or c# 등등
-            // check = age >=19?  '성인' : '미성년';  // 3항연산자
-            // users[users.length-1].id+1 if user.length else 1  // python styel
-
-            // if (users.length){
-            //     const newId = users[users.length-1].id+1
-            // }
-            // else{
-            //     const newId = 1
-            // }
-
+            const newId = users.length? users[users.length-1].id+1 : 1 ; // javascrip or java or c++ or c# 등등            
+            users.push({id:newId, name, email})
+            renderTable();
+        });    
+        // 삭제 : 단일 행   테이블의 데이터는 동적으로 생성했기때문에 이벤트를 직접 발생시키지 못하고 위임해야 한다
+        $("#userTable").on('click','.remove',function(){
+            const id = $(this).closest('tr').data('id')   // 태그 안에 있는 어트리뷰트(attr) data-id
+            users = users.filter(u => u.id != id)
+            renderTable()
         });
-        users.push({id:newId, name, email})
+        // 다중 선택 삭제( remove 확장)
+        $("#deleteBtn").on('click',function(){
+            const ids = []
+            $('.chk:checked').each(function(){
+                ids.push( $(this).closest('tr').data('id')  )
+            });
+            users = users.filter(u=> !ids.includes(u.id))
+            renderTable();
+        });
 
 
     }   
