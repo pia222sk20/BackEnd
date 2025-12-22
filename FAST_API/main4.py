@@ -45,10 +45,9 @@ class TodoResponse(BaseModel):
     modified_at:Optional[str]=None
 class TodoUpdate(BaseModel):
     '''todo수정 - 모든필드는 선택적'''
-    title:Optional[str] = Field(...,min_length=1,max_length=100)
+    title:str = Field(...,min_length=1,max_length=100)
     description:Optional[str] = Field(None,max_length=500)
-    completed:Optional[bool] = None
-    modified_at:str = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    completed:Optional[bool] = None    
 
 # 저장소
 todos_db = []
@@ -78,6 +77,7 @@ def create_todo(todo:TodoCreate):
         description=todo.descriprion,
         completed=False,
     )
+    print(f'new_data : {new_data}')
     todos_db.append(new_data)
     return new_data
 
@@ -103,15 +103,16 @@ def get_tody_byid(id:int):
 def update_todo(id:int, update_data:TodoUpdate):
     '''수정'''
     # 목록에서 id에 해당하는 요소를 찾아서 값을 변경
-    get_tody_byid(id)
-
+    get_tody_byid(id)    
     for todo in todos_db:
         if todo.id == id:
-            if todo.title is not None:
+            print(f'수정 {update_data}')            
+            todo.modified_at = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            if update_data.title is not None:
                 todo.title = update_data.title
-            if todo.description is not None:
+            if update_data.description is not None:
                 todo.description = update_data.description
-            if todo.completed is not None:
-                todo.completed = update_data.completed
+            if update_data.completed is not None:
+                todo.completed = update_data.completed                
             return todo
     
