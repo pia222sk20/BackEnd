@@ -1,7 +1,10 @@
 $(document).ready(function(){
+    // 데이터 로드
+    read_todos();
+
     $('#todoForm').on('submit',function(e){
         e.preventDefault()
-        addTodo();
+        addTodo();        
     });
 });
 
@@ -19,6 +22,7 @@ function addTodo(){
         contentType:'application/json',
         success:function(newTodo){
             console.log('추가 성공', newTodo)
+            read_todos();  // 추가한 목록을 갱신
         },
         error:function(error){
             console.log('추가 실패', error)
@@ -33,7 +37,7 @@ function read_todos(){
         success:function(todos){
             const $todolists = $('todoList')  //태그를 객체로 가져올때 변수명 앞에 $붙인다
             $todolists.empty();
-            $todolists.forEach(function(todo){
+            todos.forEach(function(todo){
 
                 const $todoItem = `
                 <div data-id = "${todo.id}">
