@@ -35,12 +35,12 @@ function read_todos(){
         url:'http://localhost:8000/api/todos',
         method:'GET',
         success:function(todos){
-            const $todolists = $('todoList')  //태그를 객체로 가져올때 변수명 앞에 $붙인다
+            const $todolists = $('#todoList')  //태그를 객체로 가져올때 변수명 앞에 $붙인다
             $todolists.empty();
             todos.forEach(function(todo){
 
                 const $todoItem = `
-                <div data-id = "${todo.id}">
+                <div data-id="${todo.id}">
                     <h3>${todo.title}</h3>
                     <p>${todo.description}</p>
                     <p>${todo.completed}</p>
