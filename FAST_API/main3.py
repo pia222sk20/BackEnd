@@ -35,7 +35,7 @@ class TodoResponse(BaseModel):
             }
         }
 # 글로벌 변수
-todo=[]
+todos=[]
 next_id = 1
 
 # 라우터
@@ -45,3 +45,24 @@ def index():
     return{
         'message':'메인페이지'
     }
+
+# 추가
+@app.post('/todos',response_model=TodoResponse,status_code=status.HTTP_201_CREATED)
+def create_tod(todo:TodoCreate):
+    '''새로운 todo 추가
+    Args:
+        todo : todo 제목
+    Returns:
+        생성된 todo
+    '''
+    new_todo = {
+        'id':next_id,
+        'title':todo.title,
+        'completed':False,
+        'created_at':datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    }
+    #리스트에 추가
+    todos.append(new_todo)
+    #id증가
+    next_id += 1
+    return new_todo
