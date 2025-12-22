@@ -45,4 +45,3 @@ def index():
     return{
         'message':'메인페이지'
     }
-
