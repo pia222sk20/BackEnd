@@ -115,4 +115,13 @@ def update_todo(id:int, update_data:TodoUpdate):
             if update_data.completed is not None:
                 todo.completed = update_data.completed                
             return todo
-    
+# 삭제
+@app.delete('/todos/{id}',status_code=status.HTTP_204_NO_CONTENT)
+def delete_todo(id:int):
+    '''삭제'''
+    get_tody_byid(id)
+
+    for index, todo in enumerate(todos_db):
+        if todo.id == id:
+            todos_db.pop(index)
+            return
