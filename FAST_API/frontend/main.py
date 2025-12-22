@@ -65,3 +65,4 @@ def create_todo(todo:TodoCreate):
 @app.get('/api/todos',response_model=list[TodoResponse])
 def read_todos():
     return todo_db
+

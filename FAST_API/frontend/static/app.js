@@ -25,3 +25,31 @@ function addTodo(){
         }
     });
 }
+
+function read_todos(){
+    $.ajax({
+        url:'http://localhost:8000/api/todos',
+        method:'GET',
+        success:function(todos){
+            const $todolists = $('todoList')  //태그를 객체로 가져올때 변수명 앞에 $붙인다
+            $todolists.empty();
+            $todolists.forEach(function(todo){
+
+                const $todoItem = `
+                <div data-id = "${todo.id}">
+                    <h3>${todo.title}</h3>
+                    <p>${todo.description}</p>
+                    <p>${todo.completed}</p>
+                    <p>${todo.created_at}</p>
+                </div>
+                `
+                $todolists.append($todoItem)
+            });
+
+
+        },
+        error:function(error){
+            console.log('읽기 실패', error);
+        }
+    })
+}
