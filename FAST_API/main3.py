@@ -50,11 +50,15 @@ def index():
 @app.post('/todos',response_model=TodoResponse,status_code=status.HTTP_201_CREATED)
 def create_tod(todo:TodoCreate):
     '''새로운 todo 추가
-    Args:
+    
+    :Args:
         todo : todo 제목
-    Returns:
+    
+    :Returns:
         생성된 todo
     '''
+    global next_id
+
     new_todo = {
         'id':next_id,
         'title':todo.title,
@@ -64,5 +68,13 @@ def create_tod(todo:TodoCreate):
     #리스트에 추가
     todos.append(new_todo)
     #id증가
+    
     next_id += 1
     return new_todo
+
+# 전체 조회
+@app.get('/todos', response_model=list[TodoResponse])
+def get_all_todos():
+    '''모든 todo조회'''
+    return todos
+# id별로 조회
