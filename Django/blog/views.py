@@ -8,3 +8,7 @@ def index(request):
     context = {'question_list' : question_list}
     return render(request,'blog/question_list.html',context)
 
+def detail(request,question_id):
+    question = Question.objects.get(id=question_id)
+    context = {'question':question}
+    return render(request,'blog/question_detail.html',context)
