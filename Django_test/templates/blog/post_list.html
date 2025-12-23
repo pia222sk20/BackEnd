@@ -8,5 +8,12 @@
 <body>
     <p>블로그 리스트</p>
     <p>{{posts.count}}개의 블로그가 있습니다.</p>    
+    {% for post in posts %}
+        <ul>
+            <li>{{post.title}}</li>
+        </ul>
+    {% endfor %}
+
+    <a href="{% url 'blog:post_create' %}">등록하기</a>
 </body>
 </html>
