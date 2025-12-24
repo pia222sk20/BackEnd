@@ -36,7 +36,7 @@ def toggle_bookmark(request, pk):
     pass
 
 # 카테고리 테이블의 값 추출
-def category_posts(request,pk)
+def category_posts(request,pk):
     pass
 
 def search(request):
