@@ -76,81 +76,7 @@ class PostViewSet(viewsets.ModelViewSet):
     serializer_class = PostListSerializer
     permission_classes = [IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly]
     def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
-    # queryset = Post.objects.select_related('author', 'category').prefetch_related('tags')
-    
-    # def get_serializer_class(self):
-    #     if self.action == 'list':
-    #         return PostListSerializer
-    #     return PostDetailSerializer
-    
-    # def get_queryset(self):
-    #     queryset = super().get_queryset()
-        
-    #     # 발행된 게시글만 표시 (작성자는 본인 글 모두 볼 수 있음)
-    #     if self.request.user.is_authenticated:
-    #         queryset = queryset.filter(
-    #             Q(status='published') | Q(author=self.request.user)
-    #         )
-    #     else:
-    #         queryset = queryset.filter(status='published')
-        
-    #     return queryset.order_by('-created_at')
-    
-    # # 작성자의 위변조를 방지
-    # def perform_create(self, serializer):
-    #     """게시글 생성 시 작성자 자동 설정"""
-    #     serializer.save(author=self.request.user)
-    
-    # @action(detail=True, methods=['post'])
-    # def publish(self, request, pk=None):
-    #     """게시글 발행"""
-    #     post = self.get_object()
-    #     if post.author != request.user:
-    #         return Response(
-    #             {'error': '권한이 없습니다.'},
-    #             status=status.HTTP_403_FORBIDDEN
-    #         )
-        
-    #     post.status = 'published'
-    #     post.save()
-    #     return Response({'status': '게시글이 발행되었습니다.'})
-    
-    # @action(detail=True, methods=['post'])
-    # def unpublish(self, request, pk=None):
-    #     """게시글 비공개"""
-    #     post = self.get_object()
-    #     if post.author != request.user:
-    #         return Response(
-    #             {'error': '권한이 없습니다.'},
-    #             status=status.HTTP_403_FORBIDDEN
-    #         )
-        
-    #     post.status = 'draft'
-    #     post.save()
-    #     return Response({'status': '게시글이 비공개되었습니다.'})
-    
-    # @action(detail=False, methods=['get'],permission_classes = [IsAuthenticated])
-    # def my_posts(self, request):
-    #     """내가 작성한 게시글 목록"""
-    #     posts = self.queryset.filter(author=request.user)  # where author_id = <AnonymousUser>
-    #     serializer = self.get_serializer(posts, many=True)
-    #     return Response(serializer.data)
-    
-    # @action(detail=False, methods=['get'])
-    # def drafts(self, request):
-    #     """임시저장 게시글 목록"""
-    #     posts = self.queryset.filter(author=request.user, status='draft')
-    #     serializer = self.get_serializer(posts, many=True)
-    #     return Response(serializer.data)
-    
-    # @action(detail=True, methods=['get'])
-    # def comments(self, request, pk=None):
-    #     """특정 게시글의 댓글 목록"""
-    #     post = self.get_object()
-    #     comments = post.comments.all()  # reverse relation
-    #     serializer = CommentSerializer(comments, many=True)
-    #     return Response(serializer.data)
+        serializer.save(author=self.request.user)    
 
 
 class CommentViewSet(viewsets.ModelViewSet):
@@ -161,21 +87,4 @@ class CommentViewSet(viewsets.ModelViewSet):
     serializer_class=CommentSerializer
     permission_classes = [IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly]
     def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
-    
-    # queryset = Comment.objects.select_related('author', 'post')
-    # serializer_class = CommentSerializer
-    
-    # def get_queryset(self):
-    #     queryset = super().get_queryset()
-        
-    #     # 쿼리 파라미터로 필터링
-    #     post_id = self.request.query_params.get('post', None)
-    #     if post_id:
-    #         queryset = queryset.filter(post_id=post_id)
-        
-    #     return queryset.order_by('created_at')
-    
-    # def perform_create(self, serializer):
-    #     """댓글 생성 시 작성자 자동 설정"""
-    #     serializer.save(author=self.request.user)
+        serializer.save(author=self.request.user)    
