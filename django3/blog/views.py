@@ -4,6 +4,8 @@
 # ViewSet : 관련된 여러 View를 하나로 묶은 View
 from django.shortcuts import render
 from rest_framework.permissions import IsAuthenticated
+
+from .filters import PostFilter
 # Create your views here.
 '''
 # 함수형 뷰
@@ -35,7 +37,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from django.db.models import Q
 from .models import Post, Comment, Category, Tag
-from .serializers import (
+from .serializers import (    
     PostListSerializer,
     PostDetailSerializer,
     CommentSerializer,
@@ -73,11 +75,13 @@ class TagViewSet(viewsets.ReadOnlyModelViewSet):
 class PostViewSet(viewsets.ModelViewSet):
     """
     게시글 ViewSet (전체 CRUD)
+    http://127.0.0.1:8000/api/posts/?category=1
     """
     queryset = Post.objects.all()
     serializer_class = PostListSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly]
 
+    permission_classes = [IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly]
+    filterset_class = PostFilter
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     # 필터링 가능 필드
     filterset_fields = ['status','category','author']
