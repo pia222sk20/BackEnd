@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django_filters', # Query parameter 기반 필터링   DRF와 연동
     #local app
     'blog',    
+    'accounts',    
 ]
 
 # REST Framework 설정
