@@ -8,7 +8,8 @@ app_name = 'blog'
 # Router 생성
 router = DefaultRouter()
 # ViewSet 등록
-router.register(r'posts',views.PostViewSet, basename='posts')
+
+router.register(r'posts',views.PostViewSet, basename='posts')  # /api/posts/my_posts
 router.register(r'comments',views.CommentViewSet, basename='comment')
 router.register(r'categories',views.CategoryViewSet, basename='category')
 router.register(r'tags',views.TagViewSet, basename='tag')
