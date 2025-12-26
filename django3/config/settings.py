@@ -40,12 +40,13 @@ INSTALLED_APPS = [
 
     # Third-party apps
     'rest_framework',       # django를 RESTfull API 로 확장  json 기반 
+    # 사용자 별 고유 인증토큰 저장 테이블, 아이디/비번 대신에 토큰인증
     'rest_framework.authtoken', # 사용자에게 고정 토큰을 발급  api요청시 토큰으로 사용자 인증
     # DRF Django Restfull Framework  표준 api서버로 만들어주는 프레임웍
     'drf_spectacular', # DRF API를  자동 문서화  Swagger UI , Redoc 제공
     'django_filters', # Query parameter 기반 필터링   DRF와 연동
     #local app
-    'blog'
+    'blog',    
 ]
 
 # REST Framework 설정
