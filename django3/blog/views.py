@@ -3,7 +3,7 @@
 # Generic View : 반복되는 패턴을 자동화한 뷰
 # ViewSet : 관련된 여러 View를 하나로 묶은 View
 from django.shortcuts import render
-
+from rest_framework.permissions import IsAuthenticated
 # Create your views here.
 '''
 # 함수형 뷰
@@ -122,10 +122,10 @@ class PostViewSet(viewsets.ModelViewSet):
         post.save()
         return Response({'status': '게시글이 비공개되었습니다.'})
     
-    @action(detail=False, methods=['get'])
+    @action(detail=False, methods=['get'],permission_classes = [IsAuthenticated])
     def my_posts(self, request):
         """내가 작성한 게시글 목록"""
-        posts = self.queryset.filter(author=request.user)
+        posts = self.queryset.filter(author=request.user)  # where author_id = <AnonymousUser>
         serializer = self.get_serializer(posts, many=True)
         return Response(serializer.data)
     
