@@ -140,7 +140,7 @@ class PostViewSet(viewsets.ModelViewSet):
     def comments(self, request, pk=None):
         """특정 게시글의 댓글 목록"""
         post = self.get_object()
-        comments = post.comments.all()
+        comments = post.comments.all()  # reverse relation
         serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data)
 
@@ -165,4 +165,3 @@ class CommentViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         """댓글 생성 시 작성자 자동 설정"""
         serializer.save(author=self.request.user)
-
