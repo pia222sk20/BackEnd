@@ -10,6 +10,13 @@ class AuthViewSet(viewsets.GenericViewSet):
     '''인증관련 viewset'''
     serializer_class = UserSerializer
 
+    def get_serializer_class(self):
+        if self.action == 'register':
+            return RegisterSerializer
+        elif self.action == 'login':            
+            return LoginSerializer
+        return UserSerializer
+
     # AllowAny : 로그인 없이 접근가능
     @action(detail=False, methods=['POST'],permission_classes=[AllowAny])
     def register(self, request):
