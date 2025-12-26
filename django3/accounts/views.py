@@ -36,4 +36,12 @@ class AuthViewSet(viewsets.GenericViewSet):
                 'user':UserSerializer(user).data
             }, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+    @action(detail=False, methods=['POST'],permission_classes=[IsAuthenticated])
+    def logout(self,request):
+        '''로그아웃'''
+        request.user.auth_token.delete()
+        return Response({'message':'로그아웃 되었습니다.'})
+    @action(detail=False, methods=['GET'], permission_classes=[IsAuthenticated])
+    def me(self,request):
+        serializer =  UserSerializer(request.user)
+        return Response(serializer.data)
