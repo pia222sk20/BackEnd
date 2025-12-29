@@ -3,3 +3,4 @@ __pycache__
 migrations
 Django2
 django_fastapi_integration
+Django-FastApi-Integration/fastapi-app/products.db
