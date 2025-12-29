@@ -64,7 +64,7 @@ def get_product(product_id:int, db:Session=Depends(get_db)):
 
 # 제품생성
 # 성공하면 HTTP_201_CREATED  상태 코드
-@app.post("/api/products",response_model=schemas.Product,status_code=status.HTTP_201_CREATED):
+@app.post("/api/products",response_model=schemas.Product,status_code=status.HTTP_201_CREATED)
 def create_product(product:schemas.ProductCreate, db:Session=Depends(get_db)):
     db_product = models.Product(**product.model_dump())
     # db에 저장
