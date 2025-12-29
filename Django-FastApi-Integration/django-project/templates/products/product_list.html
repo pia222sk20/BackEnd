@@ -1,5 +1,11 @@
-{% for product in products%}
-    <h2>{{ product.name }}</h2>
-    <p>Price: {{ product.price }}</p>
-    <p>Description: {{ product.description }}</p>
-{% endfor %}
+{% extends 'base.html' %}
+
+{% block title %} 제품리스트  {% endblock %}
+
+{% block content %}
+    {% for product in products%}
+        <h2>{{ product.name }}</h2>
+        <p>Price: {{ product.price }}</p>
+        <p>Description: {{ product.description }}</p>
+    {% endfor %}
+{% endblock %}
