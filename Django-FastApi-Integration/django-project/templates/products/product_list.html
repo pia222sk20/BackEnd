@@ -23,7 +23,7 @@
         <td>{{ product.description }}</td>
         <td>
             <a href="{% url 'products:product_edit' product.id %}" class="btn btn-primary btn-sm">수정</a>
-            <a href="{% url 'products:product_delete' product.id %}" class="btn btn-primary btn-sm">삭제</a>
+            <a href="{% url 'products:product_delete' product.id %}" class="btn btn-danger btn-sm">삭제</a>
         </td>
     </tr>
     {% endfor %}
