@@ -6,13 +6,22 @@ import models
 import schemas
 from database import engine, get_db
 
-
+# 테이블 생성
+models.Base.metadata.create_all(bind=engine)
 
 
 app = FastAPI(
     title="Product API",
-    description='제품관리'
+    description='제품관리',
+    version='1.0.0'
 )
+
+# CROS 설정 - Django 와 FastAPI 연동시 필요
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:8000","http://127.0.0.1:8000"],
+)
+
 
 # 라우터 설정
 @app.get('/')
