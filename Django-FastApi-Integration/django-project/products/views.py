@@ -17,7 +17,7 @@ async def get_products():
             print(f"Error fetching products: {e}")
             return []
 # 아이디에 대한 제품 조회 함수
-async def get_products(product_id):
+async def get_product(product_id):
     async with httpx.AsyncClient() as client:  # 비동기 http 커넥션
         try:
             response = await client.get(f'{FASTAPI_URL}/api/products/{product_id}')
@@ -74,7 +74,7 @@ async def product_create(request):
 
 async def product_edit(request, product_id):
     # 아이디로 제품 조회 후 사용자가 전달한 값으로 업데이트 fastapi 요청
-    product = await get_products(product_id)
+    product = await get_product(product_id)
     if not product:
         messages.error(request, '제품을 찾을 수 없습니다.')
         return redirect('products:product_list')
