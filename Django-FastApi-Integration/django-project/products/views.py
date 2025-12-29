@@ -26,6 +26,7 @@ async def create_product(data):
             print(f"Error creating product: {e}")
             return None
 
+###############################################################################################################
 
 async def product_list(request):
     products = await get_products()
@@ -42,8 +43,8 @@ async def product_create(request):
             data = form.cleaned_data
             result = await create_product(data)
             if result:
-                message.success(request, '제품이 성공적으로 생성되었습니다.')
+                messages.success(request, '제품이 성공적으로 생성되었습니다.')
                 return redirect('products:product_list')
             else:
-                message.error(request, '제품 생성에 실패했습니다.')
+                messages.error(request, '제품 생성에 실패했습니다.')
     return render(request, 'products/product_form.html', {'form': form,'title':'제품등록'})

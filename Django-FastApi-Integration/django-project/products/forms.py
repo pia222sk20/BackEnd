@@ -8,7 +8,7 @@ class ProductForm(forms.Form):
     description = forms.CharField(required=False,label='제품설명',
                     widget=forms.Textarea(attrs={'rows':4,'placeholder':'제품설명을 입력하세요'}))
     price = forms.FloatField(label='제품가격',
-                    widget=forms.NunberInput(attrs={'min':0,'step':0.01,'placeholder':'제품가격을 입력하세요'}))
+                    widget=forms.NumberInput(attrs={'min':0,'step':0.01,'placeholder':'제품가격을 입력하세요'}))
     stock = forms.IntegerField(initial=0, label='재고수량',
                     widget=forms.NumberInput(attrs={'min':0,'placeholder':'재고수량을 입력하세요'}))
  
