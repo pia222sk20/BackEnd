@@ -90,7 +90,7 @@ def update_product(product_id:int, product:schemas.ProductUpdate,db:Session=Depe
     return product
 
 
-@app.delete("/api/products/{product_id}",response_model=schemas.Product,status_code=status.HTTP_204_NO_CONTENT)
+@app.delete("/api/products/{product_id}",status_code=status.HTTP_204_NO_CONTENT)
 def delete_product(product_id:int, db:Session=Depends(get_db)):
     product = db.query(models.Product).filter(models.Product.id == product_id).first()
     if product is None:
