@@ -37,6 +37,17 @@ async def create_product(data):
             print(f"Error creating product: {e}")
             return None
 
+async def update_product(product_id, data):
+    async with httpx.AsyncClient() as client:  # 비동기 http 커넥션
+        try:
+            response = await client.put(f'{FASTAPI_URL}/api/products/{product_id}',json=data)
+            response.raise_for_status()  # 오류 발생시 예외 발생
+            return response.json()
+        except httpx.HTTPError as e:
+            print(f"Error creating product: {e}")
+            return None
+
+
 ###############################################################################################################
 
 async def product_list(request):
