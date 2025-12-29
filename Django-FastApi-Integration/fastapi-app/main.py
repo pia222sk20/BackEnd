@@ -76,18 +76,18 @@ def create_product(product:schemas.ProductCreate, db:Session=Depends(get_db)):
 # 제품 수정
 @app.put("/api/products/{product_id}",response_model=schemas.Product)
 def update_product(product_id:int, product:schemas.ProductUpdate,db:Session=Depends(get_db)):
-    product = db.query(models.Product).filter(models.Product.id == product_id).first()
-    if product is None:
+    db_product = db.query(models.Product).filter(models.Product.id == product_id).first()
+    if db_product is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Product not found with id {product_id}"
         )
     update_product =  product.model_dump(exclude_unset=True)  # 전달된 필드만 업데이트
     for key,value in update_product.items():
-        setattr(product,key,value)  # 동적으로 속성 설정  변경감지 기능이 있어서 업데이트된 필드만 반영
+        setattr(db_product,key,value)  # 동적으로 속성 설정  변경감지 기능이 있어서 업데이트된 필드만 반영
     db.commit()
-    db.refresh(product)
-    return product
+    db.refresh(db_product)
+    return db_product
 
 
 @app.delete("/api/products/{product_id}",status_code=status.HTTP_204_NO_CONTENT)
