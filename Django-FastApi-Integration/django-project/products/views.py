@@ -44,7 +44,14 @@ async def product_create(request):
             result = await create_product(data)
             if result:
                 messages.success(request, '제품이 성공적으로 생성되었습니다.')
-                return redirect('products:product_list')
+                return redirect('products:product_list')  # url 별칭
             else:
                 messages.error(request, '제품 생성에 실패했습니다.')
     return render(request, 'products/product_form.html', {'form': form,'title':'제품등록'})
+
+
+async def product_edit(request, product_id):
+    pass
+
+async def product_delete(request, product_id):
+    pass
