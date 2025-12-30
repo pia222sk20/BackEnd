@@ -43,5 +43,13 @@ class UserRegistationForm(forms.ModelForm):
             raise forms.ValidationError('비밀번호가 일치하지 않습니다.')
         return cleaned_data
 
+class UserLoginForm(forms.Form):
+    '''로그인 폼'''
+    username = forms.CharField(label='사용자명',
+                               widget=forms.TextInput(attrs={'placeholder':'사용자명을 입력하세요'}))
+    password = forms.CharField(label='비밀번호',
+                            widget=forms.PasswordInput(attrs={'placeholder':'비밀번호를 입력하세요'}))
+
+
 
 
