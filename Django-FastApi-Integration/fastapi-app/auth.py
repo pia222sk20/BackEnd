@@ -15,7 +15,7 @@ ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 ph = PasswordHasher()
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="api/auth/token")  # 로그인 api 앤드포인트 지정, 아이디/패스워드를 보내서 토큰을 받음
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/auth/token")  # 로그인 api 앤드포인트 지정, 아이디/패스워드를 보내서 토큰을 받음
 
 
 def get_password_hash(password: str) -> str:
