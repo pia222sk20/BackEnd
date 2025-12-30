@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.conf import settings
 import httpx
-from .forms import ProductForm
+from .forms import ProductForm, UserRegistationForm
 from django.contrib import messages
 # Create your views here.
 
@@ -110,3 +110,23 @@ async def product_delete(request, product_id):
             except httpx.HTTPError as e:
                 messages.error(request, '제품 삭제에 실패했습니다.')
                 return False
+            
+
+################################################ 인증 #################################
+def register_view(request):
+    '''회원가입'''             
+    if request.method=='POST':
+        form = UserRegistationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)  # form데이터 기반으로 user 객체를 생성
+            user.set_password(form.cleaned_data['password'])
+            user.save()
+            return redirect('login')
+    else:
+        form = UserRegistationForm()
+    return render(request,'registration/register.html',{'form':form})
+
+
+
+
+
