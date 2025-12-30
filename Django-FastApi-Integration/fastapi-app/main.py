@@ -122,7 +122,21 @@ def read_users_me(current_user:models.User = Depends(get_current_active_user)):
     return current_user
 
 
+@app.get('/api/auth/users',response_model=List[schemas.User])
+def get_users(
+    current_user : models.User = Depends(get_current_user),
+    db:Session=Depends(get_db)
+):
+    '''사용자 목록 조회(관리자만)'''
+    if not check_permission(current_user,'admin'):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail='Permission denied'
+    users = db.query(models.User).all()
+    return users
+)
 
+    
 
 
 ###########################################################################################
