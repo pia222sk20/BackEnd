@@ -37,7 +37,51 @@ def create_access_token(data:dict, expires_delta:Optional[timedelta]=None):
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
 
+def authenticate_user(db:Session, username:str, password:str):
+    '''사용자 인증'''
+    user = db.query(models.User).filter(models.User.username == username).first()
+    if not user:
+        return False
+    if not verify_password(password, user.hashed_password):
+        return False
+    return user
 
+async def get_current_user(token:str = Depends(oauth2_scheme), db:Session = Depends(get_db)):
+    '''현재 사용자 정보 가져오기'''
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail='Could not validate credentials',
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+    try:
+        payload = jwt.decode(token,SECRET_KEY,algorithms=[ALGORITHM])
+        username:str = payload.get('sub')
+        if username is None:
+            raise credentials_exception
+    except JWTError:
+        raise credentials_exception
+    user = db.query(models.User).filter(models.User.username == username).first()
+    if user is None:
+        raise credentials_exception
+    return user
+
+async def get_current_activate_user(current_user:models.User = Depends(get_current_user)):
+    '''활성화된 현재 사용자 정보 가져오기'''
+    if not current_user.is_active:
+        raise HTTPException(status_code=400, detail="Inactive user")
+    return current_user
+
+def check_permission(user:models.User, required_role:str)->bool:
+    '''사용자 권한 확인'''
+    # 숫자 클수록 권한이 높다
+    role_hierarchy = {
+        "admin": 3,
+        "manager": 2,
+        "user": 1
+    }
+    user_level = role_hierarchy.get(user.role,0)
+    required_level = role_hierarchy.get(required_role,0)
+    return user_level >= required_level
 
 
 if __name__ == "__main__":
