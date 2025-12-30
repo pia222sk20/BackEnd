@@ -1,6 +1,6 @@
 from fastapi import FastAPI,Depends,HTTPException,status
 from fastapi.middleware.cors import CORSMiddleware   #  Django(8000) 와 FastAPI(8001) 연동시 필요  CORS 문제 해결
-from fastapi.security import Oauth2PasswordRequestForm
+from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session 
 from typing import List
 import models
@@ -83,7 +83,7 @@ def register_user(user:schemas.UserCreate, db:Session=Depends(get_db)):
 
 @app.post('/api/auth/token',response_model=schemas.Token)
 def login(
-    form_data:Oauth2PasswordRequestForm = Depends(),
+    form_data:OAuth2PasswordRequestForm = Depends(),
     db:Session = Depends(get_db)
 ):
     '''로그인 및 토큰발급'''
