@@ -48,8 +48,6 @@ async def update_product(product_id, data):
             return None
 
 
-###############################################################################################################
-
 async def product_list(request):
     products = await get_products()
     return render(request,'products/product_list.html',{'products': products})
@@ -113,15 +111,38 @@ async def product_delete(request, product_id):
             
 
 ################################################ 인증 #################################
-def register_view(request):
+
+
+async def register_user(data):
+    async with httpx.AsyncClient() as client:  # 비동기 http 커넥션
+        try:
+            response = await client.post(f'{FASTAPI_URL}/api/auth/register',json=data)
+            response.raise_for_status()  # 오류 발생시 예외 발생
+            return response.json()
+        except httpx.HTTPError as e:
+            print(f"Error register user: {e}")
+            return None
+
+
+
+async def register_view(request):
     '''회원가입'''             
     if request.method=='POST':
         form = UserRegistationForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)  # form데이터 기반으로 user 객체를 생성
-            user.set_password(form.cleaned_data['password'])
-            user.save()
-            return redirect('login')
+            payload = {
+                'username':form.cleaned_data['username'],
+                'email':form.cleaned_data['email'],
+                'password':form.cleaned_data['password'],
+                'first_name':form.cleaned_data['first_name'],
+                'last_name':form.cleaned_data['last_name'],
+            }
+            result = await register_user(payload)
+            if result:
+                messages.success(request,'회원가입이 완료되었습니다.')                
+                return redirect('login')
+            else:
+                messages.error(request,'회원가입에 실패했습니다.')            
     else:
         form = UserRegistationForm()
     return render(request,'registration/register.html',{'form':form,'title':'회원가입'})
