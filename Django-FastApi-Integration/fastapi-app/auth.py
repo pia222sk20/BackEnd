@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta, timezone
 from typing import Optional
 from jose import JWTError, jwt
-from passlib.context import CryptContext
+from argon2 import PasswordHasher
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
@@ -9,21 +9,20 @@ from database import get_db
 import models
 import secrets
 # 보안 설정
+# secrets.token_urlsafe(64) 이 값을 한번 생성해서 .evn에 등록하고 사용해야 함(release 모드)
 SECRET_KEY = secrets.token_urlsafe(64)  # 서버실행시 기준 키를 재 발행.. 모든사용자 토큰 무효화 -> 강제 로그아웃
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+ph = PasswordHasher()
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="api/auth/token")  # 로그인 api 앤드포인트 지정, 아이디/패스워드를 보내서 토큰을 받음
 
 
-def verify_password(plain_password:str, hashed_password:str) -> bool:
-    '''패스워드 검증'''
-    return pwd_context.verify(plain_password, hashed_password)
+def get_password_hash(password: str) -> str:
+    return ph.hash(password)
 
-def get_password_hash(password:str)->str:
-    '''패스워드 해시 생성'''
-    return pwd_context.hash(password)
+def verify_password(plain_password: str, hashed_password: str) -> bool:
+    return ph.verify(hashed_password, plain_password)
 
 
 def create_access_token(data:dict, expires_delta:Optional[timedelta]=None):
