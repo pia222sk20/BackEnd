@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.conf import settings
 import httpx
-from .forms import ProductForm, UserRegistationForm
+from .forms import ProductForm, UserRegistationForm, UserLoginForm
 from django.contrib import messages
+
 # Create your views here.
 
 FASTAPI_URL = settings.FASTAPI_BASE_URL
@@ -147,7 +148,16 @@ async def register_view(request):
         form = UserRegistationForm()
     return render(request,'registration/register.html',{'form':form,'title':'회원가입'})
 
-def 
+async def  login_view(request):
+    '''로그인'''
+    if request.method=='POST':
+        pass
+    else:
+        form = UserLoginForm()
+    return render(request,'registration/login.html',{'title':'로그인'})
+
+
+
 
 
 
