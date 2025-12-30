@@ -3,7 +3,7 @@ from django.conf import settings
 import httpx
 from .forms import ProductForm, UserRegistationForm, UserLoginForm
 from django.contrib import messages
-
+from asgiref.sync import sync_to_async
 # Create your views here.
 
 FASTAPI_URL = settings.FASTAPI_BASE_URL
@@ -187,13 +187,7 @@ async def  login_view(request):
                 # 사용자 정보 가져오기
                 token = result['access_token']
                 user_result = await get_currnet_user_api(token)
-                if user_result:
-                    request.session['user'] = user_result
-                    request.session['token'] = token
-                    request.session['username'] = user_result['username']
-                    request.session['role'] = user_result['role']
-                    request.session['is_authenticated'] = True
-                    request.session['is_active'] = user_result['is_active']
+                if user_result:                    
                     messages.success(request,f"{user_result['username']}님 환영합니다")
                     return redirect('products:product_list')
                 else:
