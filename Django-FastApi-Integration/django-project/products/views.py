@@ -124,7 +124,7 @@ def register_view(request):
             return redirect('login')
     else:
         form = UserRegistationForm()
-    return render(request,'registration/register.html',{'form':form})
+    return render(request,'registration/register.html',{'form':form,'title':'회원가입'})
 
 
 
