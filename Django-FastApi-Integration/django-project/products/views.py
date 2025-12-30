@@ -116,7 +116,7 @@ async def product_delete(request, product_id):
 
 async def register_user(data):
     async with httpx.AsyncClient() as client:  # 비동기 http 커넥션
-        try:
+        try:            
             response = await client.post(f'{FASTAPI_URL}/api/auth/register',json=data)
             response.raise_for_status()  # 오류 발생시 예외 발생
             return response.json()
@@ -127,7 +127,8 @@ async def register_user(data):
 async def login_user(data):
     async with httpx.AsyncClient() as client:  # 비동기 http 커넥션
         try:
-            response = await client.post(f'{FASTAPI_URL}/api/auth/token',json=data)
+            print(f'data : {data}')
+            response = await client.post(f'{FASTAPI_URL}/api/auth/token',data=data)
             response.raise_for_status()  # 오류 발생시 예외 발생
             return response.json()
         except httpx.HTTPError as e:
@@ -137,7 +138,7 @@ async def get_currnet_user_api(token:str):
     async with httpx.AsyncClient() as client:  # 비동기 http 커넥션
         try:
             response = await client.get(f'{FASTAPI_URL}/api/auth/me',
-                                        headers={f'Authorization: Bearer {token}'})
+                                        headers={'Authorization': f'Bearer {token}'})
             response.raise_for_status()  # 오류 발생시 예외 발생
             return response.json()
         except httpx.HTTPError as e:
@@ -174,27 +175,29 @@ async def  login_view(request):
     '''로그인'''
     if request.method=='POST':
         form = UserLoginForm(request.POST)
-        payload = {
-            'username':form.cleaned_data['username'],
-            'password':form.cleaned_data['password'],            
-        }
-        result = await login_user(payload)
-        if result:
-            messages.success(request,'로그인이 완료되었습니다.')                
-            # 사용자 정보 가져오기
-            token = result['access_token']
-            user_result = await get_currnet_user_api(token)
-            if user_result:
-                request.session['user'] = user_result
-                request.session['token'] = token
-                request.session['username'] = user_result['username']
-                request.session['role'] = user_result['role']
-                request.session['is_authenticated'] = True
-                request.session['is_active'] = user_result['is_active']
-                messages.SUCCESS(request,f"{user_result['username']}님 환영합니다")
-                return redirect('products:product_list')
-            else:
-                messages.error(request,'로그인에 실패했습니다.')            
+        if form.is_valid():
+            payload = {
+                'username':form.cleaned_data['username'],
+                'password':form.cleaned_data['password'],            
+            }
+            print(f'payload : {payload}')
+            result = await login_user(payload)
+            if result:
+                messages.success(request,'로그인이 완료되었습니다.')                
+                # 사용자 정보 가져오기
+                token = result['access_token']
+                user_result = await get_currnet_user_api(token)
+                if user_result:
+                    request.session['user'] = user_result
+                    request.session['token'] = token
+                    request.session['username'] = user_result['username']
+                    request.session['role'] = user_result['role']
+                    request.session['is_authenticated'] = True
+                    request.session['is_active'] = user_result['is_active']
+                    messages.success(request,f"{user_result['username']}님 환영합니다")
+                    return redirect('products:product_list')
+                else:
+                    messages.error(request,'로그인에 실패했습니다.')            
     else:
         form = UserLoginForm()
     return render(request,'registration/login.html',{'form':form,'title':'로그인'})
