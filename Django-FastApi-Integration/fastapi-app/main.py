@@ -106,6 +106,16 @@ def login(
         'access_token': access_token,'token_type':'bearer'}  
     
 
+# Swagger ui 에서 테스트 할때는 요청헤더에 로그인해서 발생된 toekn이 있어야 함
+# ui 에서 자물쇠 버튼을 클릭하고
+# username / password  입력
+# client id : Bearer
+# 값은 : 발행된 토큰값을 넣어주고 요쳥하면 요청헤더에 포함  헤더모양은 다음과 같음
+
+# curl -X 'GET' \
+#   'http://localhost:8001/api/auth/me' \
+#   -H 'accept: application/json' \
+#   -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJza24yMCIsInJvbGUiOiJ1c2VyIiwiZXhwIjoxNzY3MDY3MTU5fQ.qIkTtg4TI-l9ZhNXeeQrmaIHBprdBKT0bmBgFMYVnm8'
 @app.get('/api/auth/me',response_model=schemas.User)
 def read_users_me(current_user:models.User = Depends(get_current_active_user)):
     '''현재 로그인한 사용자 정보 조회'''
