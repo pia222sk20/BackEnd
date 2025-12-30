@@ -147,6 +147,8 @@ async def register_view(request):
         form = UserRegistationForm()
     return render(request,'registration/register.html',{'form':form,'title':'회원가입'})
 
+def 
+
 
 
 
