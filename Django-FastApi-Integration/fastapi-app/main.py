@@ -132,9 +132,9 @@ def get_users(
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail='Permission denied'
+        )
     users = db.query(models.User).all()
     return users
-)
 
     
 
