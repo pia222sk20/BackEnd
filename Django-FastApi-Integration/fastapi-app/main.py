@@ -10,6 +10,7 @@ from auth import (
     authenticate_user,
     create_access_token,
     get_current_user,
+    get_current_active_user,
     get_password_hash,
     check_permission,
     ACCESS_TOKEN_EXPIRE_MINUTES
@@ -104,6 +105,14 @@ def login(
         # bearer 이 토큰을 bear 소지 하고 있는 주체가  권한을 가진다
         'access_token': access_token,'token_type':'bearer'}  
     
+
+@app.get('/api/auth/me',response_model=schemas.User)
+def read_users_me(current_user:models.User = Depends(get_current_active_user)):
+    '''현재 로그인한 사용자 정보 조회'''
+    return current_user
+
+
+
 
 
 ###########################################################################################
