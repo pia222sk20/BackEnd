@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Optional
 from jose import JWTError, jwt
 from passlib.context import CryptContext
@@ -9,7 +9,7 @@ from database import get_db
 import models
 import secrets
 # 보안 설정
-SECRET_KEY = secrets.token_urlsafe(64)
+SECRET_KEY = secrets.token_urlsafe(64)  # 서버실행시 기준 키를 재 발행.. 모든사용자 토큰 무효화 -> 강제 로그아웃
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
@@ -21,7 +21,7 @@ def verify_password(plain_password:str, hashed_password:str) -> bool:
     '''패스워드 검증'''
     return pwd_context.verify(plain_password, hashed_password)
 
-def get_passwrod_hash(password:str)->str:
+def get_password_hash(password:str)->str:
     '''패스워드 해시 생성'''
     return pwd_context.hash(password)
 
@@ -65,7 +65,7 @@ async def get_current_user(token:str = Depends(oauth2_scheme), db:Session = Depe
         raise credentials_exception
     return user
 
-async def get_current_activate_user(current_user:models.User = Depends(get_current_user)):
+async def get_current_active_user(current_user:models.User = Depends(get_current_user)):
     '''활성화된 현재 사용자 정보 가져오기'''
     if not current_user.is_active:
         raise HTTPException(status_code=400, detail="Inactive user")
