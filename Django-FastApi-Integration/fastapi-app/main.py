@@ -1,5 +1,6 @@
 from fastapi import FastAPI,Depends,HTTPException,status
 from fastapi.middleware.cors import CORSMiddleware   #  Django(8000) 와 FastAPI(8001) 연동시 필요  CORS 문제 해결
+from fastapi.security import Oauth2PasswordRequestForm
 from sqlalchemy.orm import Session 
 from typing import List
 import models
@@ -13,6 +14,7 @@ from auth import (
     check_permission,
     ACCESS_TOKEN_EXPIRE_MINUTES
 )
+from datetime import timedelta
 
 # 테이블 생성
 models.Base.metadata.create_all(bind=engine)
@@ -21,7 +23,7 @@ models.Base.metadata.create_all(bind=engine)
 app = FastAPI(
     title="Product API",
     description='제품관리',
-    version='1.0.0'
+    version='2.0.0'
 )
 
 # CROS 설정 - Django 와 FastAPI 연동시 필요
@@ -79,6 +81,32 @@ def register_user(user:schemas.UserCreate, db:Session=Depends(get_db)):
     db.refresh(db_user)
     return db_user
 
+@app.post('/api/auth/token',response_model=schemas.Token)
+def login(
+    form_data:Oauth2PasswordRequestForm = Depends(),
+    db:Session = Depends(get_db)
+):
+    '''로그인 및 토큰발급'''
+    user = authenticate_user(db,form_data.username, form_data.password)
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail='Incorrect username or password',
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    # 토큰 만료시간 설정
+    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token =  create_access_token(
+        data = {'sub':user.username, 'role':user.role},
+        expires_delta=access_token_expires
+    )
+    return {
+        # bearer 이 토큰을 bear 소지 하고 있는 주체가  권한을 가진다
+        'access_token': access_token,'token_type':'bearer'}  
+    
+
+
+###########################################################################################
 # 제품 목록 조회
 #response_model 
     # 반환데이터 자동검증
