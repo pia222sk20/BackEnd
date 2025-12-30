@@ -19,10 +19,15 @@ class UserRegistationForm(forms.Form):
                                widget=forms.PasswordInput(attrs={'placeholder':'비밀번호를 입력하세요'}))
     password_confirm = forms.CharField(label='비밀번호 확인',
                                widget=forms.PasswordInput(attrs={'placeholder':'비밀번호를 입력하세요'}))
-    username = forms.TextInput(attrs={'placeholder':'사용자명을 입력하세요'})
-    email = forms.EmailInput(attrs={'placeholder':'이메일을 입력하세요'})
-    first_name = forms.TextInput(attrs={'placeholder':'이름을 입력하세요'})
-    last_name = forms.TextInput(attrs={'placeholder':'성을 입력하세요'})
+    username = forms.CharField(label='사용자명',
+                               widget=forms.TextInput(attrs={'placeholder':'사용자명을 입력하세요'}))
+    
+    email = forms.CharField(label='이메일',
+                               widget=forms.EmailInput(attrs={'placeholder':'이메일을 입력하세요'}))    
+    first_name = forms.CharField(label='이름',
+                               widget=forms.TextInput(attrs={'placeholder':'이름을 입력하세요'}))
+    last_name = forms.CharField(label='성',
+                               widget=forms.TextInput(attrs={'placeholder':'성을 입력하세요'}))
     
 
 class UserLoginForm(forms.Form):
