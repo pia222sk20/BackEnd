@@ -171,6 +171,15 @@ async def register_view(request):
         form = UserRegistationForm()
     return render(request,'registration/register.html',{'form':form,'title':'회원가입'})
 
+# 1. 세션 작업을 동기 함수로 분리
+def set_session_data(request, token, user_data):
+    request.session['fastapi_token'] = token
+    request.session['user_id'] = user_data['id']
+    request.session['username'] = user_data['username']
+    request.session['user_role'] = user_data['role']
+    request.session['is_authenticated'] = True
+    request.session.save()
+    
 async def  login_view(request):
     '''로그인'''
     if request.method=='POST':
@@ -187,7 +196,9 @@ async def  login_view(request):
                 # 사용자 정보 가져오기
                 token = result['access_token']
                 user_result = await get_currnet_user_api(token)
-                if user_result:                    
+                if user_result:                   
+                    # 세션에 저장 (동기 함수 사용)
+                    await sync_to_async(set_session_data)(request, token, user_result) 
                     messages.success(request,f"{user_result['username']}님 환영합니다")
                     return redirect('products:product_list')
                 else:
