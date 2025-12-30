@@ -154,7 +154,7 @@ async def  login_view(request):
         pass
     else:
         form = UserLoginForm()
-    return render(request,'registration/login.html',{'title':'로그인'})
+    return render(request,'registration/login.html',{'form':form,'title':'로그인'})
 
 
 
