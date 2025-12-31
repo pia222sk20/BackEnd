@@ -75,6 +75,7 @@ archive 폴더 안에 있는 image.jpg를 삭제하세요.
 ```
 
 ### 10 도커 컨터이너 확인 및 실행
+- docker run -it ubuntu bash  # 도커를 이용해서 ubuntu를 컨테이너에 넣고 실행하고 컨테이너에 진입
 - docker ps -a  # 현재 실행 및 종료된 컨테이너 목록
 - 만약에 중지되어 있으면 docker desktop으로 실행 또는 docker start [CONTAINER ID]
 - 실행중인 컨테이너 안에 진입 : docker exec -it [CONTAINER ID] bash
