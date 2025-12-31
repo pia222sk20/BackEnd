@@ -132,4 +132,19 @@ echo -e "Error: 404\nInfo: Login success\nError: 500\nWarn: Low disk" > server.l
 - grep -c "Error" server.log      # 매칭되는 줄의 개수 카운트 (-c)
 - grep "^Error" server.log        # "Error"로 *시작하는* 줄만 검색 (정규식 ^)
 
+```
+find 명령어
+```
+- find /etc -name "*.conf"        # /etc 아래 확장자가 .conf인 모든 파일 찾기
+- find /usr -size +10M            # 10MB보다 큰 파일 찾기
+- find . -type d                  # 현재 경로 아래의 '디렉토리'만 찾기
+- find . -name "fruits.txt" -delete # 찾아서 바로 삭제 (주의!)
 
+```
+파이프 응용
+```
+# /etc 디렉토리 파일 중 'conf'가 들어가는 파일 개수 세기
+- ls /etc | grep "conf" | wc -l
+
+# 프로세스 목록 중 'bash'만 찾아서 보기
+- ps aux | grep bash
