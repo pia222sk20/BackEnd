@@ -148,3 +148,9 @@ find 명령어
 
 # 프로세스 목록 중 'bash'만 찾아서 보기
 - ps aux | grep bash
+
+```
+/var 디렉토리 전체에서 이름에 log가 들어가는 파일을 찾으세요.
+위에서 찾은 파일 중, 파일 크기가 1kbyte 이상인 것만 찾아보세요. (find /var -name "*log*" -size +1k)
+ls -al /etc 명령어의 결과에서 "root"라는 단어가 몇 번 나오는지 파이프와 grep -c를 이용해 한 줄 명령어로 구하세요.
+```
