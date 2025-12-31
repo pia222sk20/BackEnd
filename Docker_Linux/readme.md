@@ -290,3 +290,17 @@ ncdu라는 디스크 사용량 분석 도구를 apt로 설치해보세요.
 ```
 Shebang (#!/bin/bash): 스크립트 첫 줄에 필수. 어떤 쉘로 실행할지 지정.
 ```
+
+nano hello.sh
+```
+#!/bin/bash
+NAME="LinuxUser"              # 변수 지정 (공백 없어야 함)
+echo "Hello, $NAME!"
+echo "오늘 날짜는 $(date) 입니다." # 명령어 결과 넣기 $()
+
+echo -n "당신의 이름은? "
+read USER_INPUT               # 사용자 입력 받기
+echo "반갑습니다, $USER_INPUT 님."
+```
+chmod +x hello.sh
+./hello.sh
