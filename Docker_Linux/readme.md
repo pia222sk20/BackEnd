@@ -1,3 +1,13 @@
+### 도커를 이용한 ubuntu 설치
+- docker 공식사이트에서 자신의 운영체재에 맞는 버전 설치(window :  ..... AMD64)
+- powershell을 관리자 권한으로 열어서
+- wsl --install
+- 재부팅
+- docker desktop 실행해서 docker가 실행상태
+- powershell에서 docker info 정상 실행 확인
+- docker run -it ubuntu bash  실행해서 컨터이너 안의 ubuntu에 접속한다
+
+
 ### 1. 디렉토리 이동 및 위치 확인
 - `pwd`: 현재 위치한 디렉토리의 경로를 출력합니다.
 - `ls`: 현재 디렉토리의 파일과 폴더 목록을 보여줍니다.
