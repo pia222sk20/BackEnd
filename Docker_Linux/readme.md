@@ -305,3 +305,19 @@ echo "반갑습니다, $USER_INPUT 님."
 chmod +x hello.sh
 
 ./hello.sh
+
+#### 조건문(check_file.sh)
+```
+#!/bin/bash
+FILE='mylog.txt'
+if [ -f "$FILE" ]; then
+        echo "$FILE is exist"
+        cat $FILE
+else
+        echo "$FILE is not exist, and create that"
+        touch $FILE
+fi
+
+chmod +x check_file.sh
+./check_file.sh
+```
