@@ -332,3 +332,110 @@ do
 done
 ls *.data
 ```
+#### 시스템 모니터링
+```
+#!/bin/bash
+
+# Server Name
+server_name=$(hostname)
+
+# Color variables for better readability (Industry standard practice for CLI tools)
+GREEN='\033[0;32m'
+BLUE='\033[0;34m'
+RED='\033[0;31m'
+CLEAR='\033[0m'
+
+# Helper function for colored output
+function print_color() {
+    local color=$1
+    local text=$2
+    echo -e "${color}${text}${CLEAR}"
+}
+
+# --- Monitor Functions ---
+
+function memory_check() {
+    echo ""
+    print_color "$BLUE" "Memory usage on ${server_name}:"
+    free -h
+    echo ""
+}
+
+function cpu_check() {
+    echo ""
+    print_color "$BLUE" "CPU load on ${server_name}:"
+    uptime
+    echo ""
+}
+
+function disk_check() {
+    echo ""
+    print_color "$BLUE" "Disk usage on ${server_name}:"
+    df -h | grep -vE '^Filesystem|tmpfs|cdrom' # Exclude tmpfs and cdrom for cleaner output
+    echo ""
+}
+
+function tcp_check() {
+    echo ""
+    print_color "$BLUE" "TCP connections count:"
+    # In production, simple connection counting is common for quick health checks
+    cat /proc/net/tcp | wc -l
+    echo ""
+}
+
+function kernel_check() {
+    echo ""
+    print_color "$BLUE" "Kernel version:"
+    uname -r
+    echo ""
+}
+
+# --- Interactive Menu ---
+
+function show_menu() {
+    echo -e "\n${GREEN}--- System Monitor Menu ---${CLEAR}"
+    echo "1) Check Memory Usage"
+    echo "2) Check CPU Load"
+    echo "3) Check Disk Usage"
+    echo "4) Check TCP Connections"
+    echo "5) Check Kernel Version"
+    echo "6) Run All Checks"
+    echo "0) Exit"
+    echo -n "Choose an option: "
+}
+
+function main() {
+    while true; do
+        show_menu
+        read -r option
+        case $option in
+            1) memory_check ;;
+            2) cpu_check ;;
+            3) disk_check ;;
+            4) tcp_check ;;
+            5) kernel_check ;;
+            6) 
+                memory_check
+                cpu_check
+                disk_check
+                tcp_check
+                kernel_check
+                ;;
+            0) 
+                print_color "$GREEN" "Exiting..."
+                exit 0 
+                ;;
+            *) 
+                print_color "$RED" "Invalid option. Please try again."
+                ;;
+        esac
+        
+        echo -n "Press Enter to continue..."
+        read -r
+    done
+}
+
+# Start the script
+main
+
+```
