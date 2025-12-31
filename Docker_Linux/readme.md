@@ -250,10 +250,30 @@ ls -l /var/www/html/index.html
 ```
 
 ### 15. 시스템 관리자 와 패키지
-패키지 관리 라이브러리 라이프사이클```
+패키지 관리 라이브러리 라이프사이클
+```
 apt update                      # 서버에서 최신 패키지 정보를 가져옴
 apt install htop curl tree -y   # htop, curl, tree 설치
 apt remove tree                 # tree 삭제 (설정 파일은 남음)
 apt purge tree                  # tree 완전 삭제 (설정 파일 포함)
 apt autoremove                  # 쓰지 않는 의존성 패키지 자동 정리
+```
+시스템 상태 확인
+```
+top -b -n 1                     # 현재 시스템 상태 스냅샷 (CPU, 메모리)
+htop                            # 컬러풀한 그래픽 모드 (F10 또는 q로 종료)
+df -h                           # 디스크 용량 확인 (Disk Free) -h: Human readable
+du -sh /var/log                 # 특정 디렉토리의 용량 확인 (Disk Usage)
+free -h                         # 남은 메모리(RAM) 확인
+```
+프로제스 제어
+```
+# 백그라운드에서 오래 도는 프로세스 시뮬레이션
+sleep 1000 &                    # 1000초 동안 대기하는 명령을 백그라운드(&) 실행
+ps aux | grep sleep             # sleep 프로세스 찾기 (PID 확인)
+
+# 프로세스 강제 종료 (PID가 1234라면)
+# kill 1234
+# kill -9 1234                  # 말을 안 들으면 강제 종료 (-9)
+pkill sleep                     # 이름으로 바로 종료
 ```
