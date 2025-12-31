@@ -169,3 +169,14 @@ Warning: Disk full
 Info: Update completed
 EOF
 ```
+
+| 옵션 | 설명 | 기억법 |
+| :--- | :--- | :--- |
+| `-i` | 대소문자 무시 | **I**gnore case |
+| `-v` | 패턴 제외 (반전) | In**V**ert |
+| `-n` | 줄 번호 표시 | **N**umber |
+| `-r` | 하위 폴더 포함 검색 | **R**ecursive |
+| `-c` | 개수 카운트 | **C**ount |
+| `-l` | 파일명만 출력 | **L**ist file |
+| `^` | 라인의 시작 | (Shift+6) |
+| `$` | 라인의 끝 | (Shift+4) |
