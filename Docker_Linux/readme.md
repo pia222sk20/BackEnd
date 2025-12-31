@@ -154,3 +154,18 @@ find 명령어
 위에서 찾은 파일 중, 파일 크기가 1kbyte 이상인 것만 찾아보세요. (find /var -name "*log*" -size +1k)
 ls -al /etc 명령어의 결과에서 "root"라는 단어가 몇 번 나오는지 파이프와 grep -c를 이용해 한 줄 명령어로 구하세요.
 ```
+
+```
+cat << EOF > grep_practice.txt
+Apple Pie
+Banana Split
+Cherry Cake
+apple juice
+Banana Bread
+Date 2024
+Error: File not found
+Error: Access denied
+Warning: Disk full
+Info: Update completed
+EOF
+```
