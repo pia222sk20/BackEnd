@@ -248,3 +248,13 @@ chmod 644 /var/www/html/index.html
 ls -ld /var/www/html
 ls -l /var/www/html/index.html
 ```
+
+### 15. 시스템 관리자 와 패키지
+패키지 관리 라이브러리
+```
+apt update                      # 서버에서 최신 패키지 정보를 가져옴
+apt install htop curl tree -y   # htop, curl, tree 설치
+apt remove tree                 # tree 삭제 (설정 파일은 남음)
+apt purge tree                  # tree 완전 삭제 (설정 파일 포함)
+apt autoremove                  # 쓰지 않는 의존성 패키지 자동 정리
+```
