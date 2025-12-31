@@ -105,3 +105,16 @@ nano 에디터
 - 잘라내기 : Ctrl+k (한줄 삭제/ 잘라내기)
 - 검색 : Ctrl+w  누르고 찾을 단어 입력
 - 저장 및 종료 : Ctrl+o(Write out) -> Enter -> Ctrl+x(Exit)
+
+### 12. 로그 실시간 감시
+- touch access.log
+- tail -f access.log      # 파일에 내용이 추가될 때마다 실시간으로 화면에 출력
+
+```
+실습:
+Nano를 사용하여 diary.txt를 만드세요.
+내용에 "Today is Monday"를 적고, 그 줄을 복사해서 5번 붙여넣으세요.
+3번째 줄의 "Monday"를 "Friday"로 수정하세요.
+저장 후 빠져나와 cat으로 내용을 확인하세요.
+head 명령어를 써서 이 파일의 앞 3줄만 출력해보세요.
+```
