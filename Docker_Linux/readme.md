@@ -65,3 +65,11 @@
 - rm -r backend_backup            # 폴더 삭제는 -r 필수
 - rm -rf project/db               # 묻지도 따지지도 않고 강제 삭제 (-f: force, 매우 위험)
 # *주의: rm -rf / 명령은 시스템 전체를 날릴 수 있습니다. 절대 금지!*
+
+```
+my_work라는 폴더를 만들고 그 안에 year_2024, year_2025 폴더를 만드세요.
+year_2024 안에 report1.txt, report2.txt, image.jpg 파일을 만드세요.
+와일드카드(*)를 사용하여 year_2024의 모든 .txt 파일을 year_2025로 복사하세요.
+year_2024 폴더를 통째로 archive라는 이름으로 변경하세요.
+archive 폴더 안에 있는 image.jpg를 삭제하세요.
+```
