@@ -303,4 +303,5 @@ read USER_INPUT               # 사용자 입력 받기
 echo "반갑습니다, $USER_INPUT 님."
 ```
 chmod +x hello.sh
+
 ./hello.sh
