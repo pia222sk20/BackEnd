@@ -118,3 +118,18 @@ Nano를 사용하여 diary.txt를 만드세요.
 저장 후 빠져나와 cat으로 내용을 확인하세요.
 head 명령어를 써서 이 파일의 앞 3줄만 출력해보세요.
 ```
+
+### 13. Grep & Find
+``` 
+샘플 데이터
+echo -e "Apple\nBanana\nCherry\nDate\nElderberry" > fruits.txt
+echo -e "Error: 404\nInfo: Login success\nError: 500\nWarn: Low disk" > server.log
+```
+- grep "Apple" fruits.txt         # 기본 검색
+- grep -i "apple" fruits.txt      # 대소문자 무시 (-i)
+- grep -v "Error" server.log      # "Error"가 *없는* 줄만 출력 (-v: 반전)
+- grep -n "Error" server.log      # 몇 번째 줄인지 줄 번호 표시 (-n)
+- grep -c "Error" server.log      # 매칭되는 줄의 개수 카운트 (-c)
+- grep "^Error" server.log        # "Error"로 *시작하는* 줄만 검색 (정규식 ^)
+
+
