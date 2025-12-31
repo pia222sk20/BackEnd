@@ -321,3 +321,14 @@ fi
 chmod +x check_file.sh
 ./check_file.sh
 ```
+#### 순환문
+```
+#!/bin/bash
+for i in {1..5}
+do
+        echo "work file $i created...."
+        touch "job_$i.data"
+        sleep 0.5
+done
+ls *.data
+```
