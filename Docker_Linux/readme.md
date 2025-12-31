@@ -35,3 +35,33 @@
 - ls -lh                  # 파일 크기를 사람이 읽기 편하게(K, M, G 단위) 표시
 - ls -R                   # 하위 디렉토리 내용까지 펼쳐서 보기 (재귀적, 스크롤 주의!)
 - ls -d */                # 파일은 제외하고 디렉토리만 골라서 보기
+
+### 5. 디렉토리 생성
+- cd ~
+- mkdir project                   # 폴더 하나 생성
+- mkdir -p project/backend/api    # 하위 폴더까지 한 번에 생성 (-p: parents)
+- mkdir project/frontend project/db # 여러 폴더 동시에 생성
+- ls -R project                   # 구조 확인
+
+### 6. 파일생성
+- cd project
+- touch README.md                 # 빈 파일 생성
+- touch index.html style.css      # 여러 파일 동시 생성
+- touch .gitignore                # 숨김 파일 생성
+- ls                              # .gitignore 안 보임
+- ls -a                           # 이제 보임
+
+### 7. 복사의 다양한 옵션
+- cp README.md README_bak.md      # 파일 복사
+- cp -r backend backend_backup    # 폴더 통째로 복사할 땐 -r (recursive) 필수!
+- cp -v index.html index_v2.html  # 복사 과정을 자세히 출력 (-v: verbose)
+
+### 8. 이동(mv)와 이름변경
+- mv style.css frontend/
+- mv index_v2.html old_index.html # 이름 변경 (같은 폴더 내 이동 = 이름 변경)
+
+### 9. 삭제(rm) - 주의
+- rm old_index.html               # 파일 삭제 (되살릴 수 없음!)
+- rm -r backend_backup            # 폴더 삭제는 -r 필수
+- rm -rf project/db               # 묻지도 따지지도 않고 강제 삭제 (-f: force, 매우 위험)
+# *주의: rm -rf / 명령은 시스템 전체를 날릴 수 있습니다. 절대 금지!*
