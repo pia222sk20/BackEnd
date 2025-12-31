@@ -201,3 +201,23 @@ ls -l secret.txt
 | `r-x` | 4+0+1 = **5** | 읽고 실행 가능 (일반 프로그램/폴더 표준) |
 | `r--` | 4+0+0 = **4** | 읽기만 가능 (중요 설정 파일) |
 | `---` | 0+0+0 = **0** | 아무것도 못함 (접근 금지) |
+
+#### 권한변경 - 숫자모드
+```
+chmod 777 secret.txt  # rwxrwxrwx (누구나 다 가능 - 보안 위험!)
+ls -l secret.txt
+
+chmod 755 secret.txt  # rwxr-xr-x (주인은 맘대로, 남들은 실행/읽기만)
+ls -l secret.txt
+
+chmod 600 secret.txt  # rw------- (나만 읽고 쓰기 - 개인키/비번 파일 필수)
+ls -l secret.txt
+```
+
+#### 권한변경 - 심볼릭모드
+```
+chmod u+x secret.txt  # User에게 eXecute 권한 추가
+chmod g-w secret.txt  # Group에게 Write 권한 제거
+chmod o=r secret.txt  # Others는 Read만 가능하게 고정
+chmod a-r secret.txt  # All(모두)에게서 Read 권한 뺏기 (나도 못 읽음!)
+```
