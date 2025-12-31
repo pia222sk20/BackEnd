@@ -73,3 +73,8 @@ year_2024 안에 report1.txt, report2.txt, image.jpg 파일을 만드세요.
 year_2024 폴더를 통째로 archive라는 이름으로 변경하세요.
 archive 폴더 안에 있는 image.jpg를 삭제하세요.
 ```
+
+### 10 도커 컨터이너 확인 및 실행
+- docker ps -a  # 현재 실행 및 종료된 컨테이너 목록
+- 만약에 중지되어 있으면 docker desktop으로 실행 또는 docker start [CONTAINER ID]
+- 실행중인 컨테이너 안에 진입 : docker exec -it [CONTAINER ID] bash
