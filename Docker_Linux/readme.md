@@ -89,3 +89,19 @@ archive 폴더 안에 있는 image.jpg를 삭제하세요.
 - docker ps -a  # 현재 실행 및 종료된 컨테이너 목록
 - 만약에 중지되어 있으면 docker desktop으로 실행 또는 docker start [CONTAINER ID]
 - 실행중인 컨테이너 안에 진입 : docker exec -it [CONTAINER ID] bash
+
+### 11 에디터
+- apt update && apt install nano -y   # 패키지 목록 갱신 후 nano 설치
+- ls -R /etc > file_list.txt      # /etc 목록을 파일로 저장 (내용이 꽤 김)
+- cat file_list.txt               # 순식간에 지나가서 앞부분을 못 봄
+- head -n 5 file_list.txt         # 딱 첫 5줄만 보기
+- tail -n 5 file_list.txt         # 딱 마지막 5줄만 보기
+
+```
+nano 에디터
+```
+- 입력 : "ServerIP = 127.0.0.1" 입력
+- 복사/붙여넣기 : Alt+6( 복사 )  Ctrl+U (붙여넣기)
+- 잘라내기 : Ctrl+k (한줄 삭제/ 잘라내기)
+- 검색 : Ctrl+w  누르고 찾을 단어 입력
+- 저장 및 종료 : Ctrl+o(Write out) -> Enter -> Ctrl+x(Exit)
