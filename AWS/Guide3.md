@@ -107,3 +107,17 @@ def create_user(user:UserCreate, db:Session=Depends(get_db)):
 
 # 실행
 uvicorn fastapi_main:app --host 0.0.0.0 --port 8000 --reload
+
+
+
+# 고정ip를 사용하고 싶을때
+ ---
+  EC2 자체의 공인 IP를 고정하고 싶을 때
+  만약 EC2를 재부팅할 때마다 퍼블릭 IP가 바뀌는 게 싫다면 탄력적 IP (Elastic IP, EIP)를 사용해야 합니다.
+
+   1. AWS 콘솔 → EC2 → 왼쪽 메뉴 [탄력적 IP].
+   2. [탄력적 IP 주소 할당] → 할당 클릭.
+   3. 생성된 IP 선택 → [작업] → [탄력적 IP 주소 연결].
+   4. 내 EC2 인스턴스를 선택하고 연결.
+   5. 주의: 탄력적 IP를 만들고 EC2에 연결하지 않거나, EC2를 중지(Stop) 해두면 요금(시간당 약 6원)이 부과됩니다. (실행 중인 인스턴스에 연결되어 있으면 무료)  
+  ---
