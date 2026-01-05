@@ -5,3 +5,4 @@ Django2
 django_fastapi_integration
 Django-FastApi-Integration/fastapi-app/products.db
 myproject
+.env
