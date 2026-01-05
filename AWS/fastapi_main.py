@@ -63,7 +63,7 @@ def read_root():
     return {'status':'ok','time':datetime.now()}
 
 #사용자 생성
-@app.post('/users', response_model=UserResponse,status_code=status.HTTP_201_CREATED)
+@app.post('/users', response_model=UserResponse,status_code=status.HTTP_201_CREATED,summary='사용자 생성')
 def create_user(user:UserCreate, db:Session=Depends(get_db)):
     db_user = db.query(User).filter(User.email == user.email).first()
     if db_user:
