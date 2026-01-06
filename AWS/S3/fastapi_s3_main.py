@@ -58,7 +58,7 @@ s3_client = boto3.client(
 )
 
 # S3 endpoint
-@app.post('/upload/', target=['S3-RDS'])
+@app.post('/upload/', tags=['S3-RDS'])
 async def upload_image_to_s3_and_db(
     username:str,
     file:UploadFile = File(...),
@@ -92,7 +92,7 @@ async def upload_image_to_s3_and_db(
     except Exception as e:
         db.rollback()
         raise HTTPException(status_code=500, detail=str(e))
-@app.get("/images/",target=['S3-RDS'])
+@app.get("/images/",tags=['S3-RDS'])
 def get_all_images(db:Session=Depends(get_db)):
     '''DB에 저장된 모든 이미지 목록 조회'''
     return db.query(UserImage).all()
