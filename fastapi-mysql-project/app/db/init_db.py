@@ -6,4 +6,4 @@ from app.models.file_model import UploadedFile
 async def init_table():
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
-    print('database tables creaed successfully')
+    print('database tables created successfully')

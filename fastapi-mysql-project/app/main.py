@@ -11,7 +11,7 @@ async def lifespan(app: FastAPI):
     # 앱 종료시 실행(필요시)
 
 
-app = FastAPI(title=settings.PROJECT_NAME)
+app = FastAPI(title=settings.PROJECT_NAME, lifespan=lifespan)
 
 @app.get("/")
 def read_root():
