@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"name": "BackEnd",
+			"path": ".."
+		},
+		{
+			"name": "fastapi-mysql-project_step3",
+			"path": "../../docker-main/fastapi-mysql-project_step3"
+		},
+		{
+			"name": "fastapi-mysql-project_step4",
+			"path": "../../docker-main/fastapi-mysql-project_step4"
+		}
+	],
+	"settings": {}
+}
