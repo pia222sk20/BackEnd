@@ -67,10 +67,11 @@ class HybridRetriever:
             sparse_weight
         )
         
-        # Filter by similarity threshold
+        # Filter by similarity threshold (lowered to be more permissive)
+        # Keep results if they have any positive score from either method
         filtered_results = [
             r for r in fused_results
-            if r.get("similarity", 0) >= settings.similarity_threshold or r.get("score", 0) > 0
+            if r.get("rrf_score", 0) > 0  # RRF score is always present after fusion
         ]
         
         # Return top-k results

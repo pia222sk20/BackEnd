@@ -44,7 +44,8 @@ class RAGChain:
                 "answer": "죄송합니다. 질문에 답변할 수 있는 관련 문서를 찾을 수 없습니다.",
                 "sources": [],
                 "confidence": 0.0,
-                "retrieved_chunks": 0
+                "retrieved_chunks": 0,
+                "model": self.model
             }
         
         log.info(f"Retrieved {len(retrieved_chunks)} relevant chunks")

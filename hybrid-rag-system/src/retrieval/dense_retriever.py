@@ -73,13 +73,23 @@ class DenseRetriever:
         """Search for similar chunks"""
         top_k = top_k or settings.top_k_dense
         
+        # Get actual collection size
+        collection_count = self.collection.count()
+        
+        # Adjust top_k if it exceeds collection size
+        actual_top_k = min(top_k, collection_count)
+        
+        if actual_top_k == 0:
+            log.warning("No documents in collection")
+            return []
+        
         # Generate query embedding
         query_embedding = self.embedding_manager.embed_text(query)
         
         # Search in collection
         results = self.collection.query(
             query_embeddings=[query_embedding],
-            n_results=top_k,
+            n_results=actual_top_k,
             include=["documents", "metadatas", "distances"]
         )
         

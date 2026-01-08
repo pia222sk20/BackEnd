@@ -21,10 +21,10 @@ class Settings(BaseSettings):
     chunk_overlap: int = Field(default=150, env="CHUNK_OVERLAP")
     
     # Retrieval Configuration
-    top_k_dense: int = Field(default=15, env="TOP_K_DENSE")
-    top_k_sparse: int = Field(default=15, env="TOP_K_SPARSE")
+    top_k_dense: int = Field(default=10, env="TOP_K_DENSE")
+    top_k_sparse: int = Field(default=10, env="TOP_K_SPARSE")
     top_k_final: int = Field(default=5, env="TOP_K_FINAL")
-    similarity_threshold: float = Field(default=0.65, env="SIMILARITY_THRESHOLD")
+    similarity_threshold: float = Field(default=0.3, env="SIMILARITY_THRESHOLD")
     
     # Firebase Configuration
     firebase_project_id: Optional[str] = Field(default=None, env="FIREBASE_PROJECT_ID")
