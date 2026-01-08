@@ -234,13 +234,13 @@ MAX_TOKENS=2000             # 최대 토큰 수
 docker build -t hybrid-rag-system .
 
 # 컨테이너 실행
-docker run -d \
-  --name rag-api \
-  -p 8000:8000 \
-  -v $(pwd)/data:/app/data \
-  -v $(pwd)/index:/app/index \
-  --env-file .env \
+docker run -d --name rag-api ^
+  -p 8000:8000 ^
+  -v C:\001.CLAUD\hybrid-rag-system\data:/app/data ^
+  -v C:\001.CLAUD\hybrid-rag-system\index:/app/index ^
+  --env-file .env ^
   hybrid-rag-system
+
 ```
 
 ## ☁️ Firebase/Cloud Run 배포
